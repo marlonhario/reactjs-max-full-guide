@@ -1,0 +1,55 @@
+Maximillian Schwarzmuller (Freelance Dev & React Dev)
+
+React 16.6 - The Complete Guide (incl. React Router & Redux)
+
+React - library
+      - highly reactive and superfast javascript driven web application
+      - most popular javascript library 2019
+
+    what?
+      - A javascript library for building User Interface (using components for building)
+      - It run on a browser not in a server
+
+    Tools
+      - Codepen - web editor for playground
+
+        to create or to start writing code
+            - Hompage > create > new pen
+            - on JS block 
+                    - click the gear icon to import react
+                    - then click the quick add dropdown select react and also add react-dom
+                    - then select babel for javascript processor
+
+            react - is use to build a logic components
+            react-DOm - is rendering all components into real DOM
+            babel - is a tool to compile all next gen javascript code your writing.
+                  - allows us to use JSX (javascript xml)
+
+        sample using Codepen
+            HTML :
+                <div id="app"></div>
+
+            JS :
+                import (Babel, React, React-DOM)
+
+                function Person (props) {
+                    return (
+                        <div className="person">
+                            <h1>{props.name}</h1>
+                            <p>Your age: {props.age}</p>
+                        </div>
+                    )
+                }
+
+                var app = {
+                    <div>
+                        <Person name="Max" age="28" />
+                        <Person name="Name" age="30" />
+                    </div>
+                }
+
+                ReactDOM.render(app, document.querySelector('#app'));
+
+
+        props - contains all attributes added into elements
+        ES7 - Nextgen Javascript    

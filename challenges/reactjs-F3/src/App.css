@@ -1,0 +1,35 @@
+:root {
+  --mainBlue: #2a2a72;
+  --lightBlue: #009ffd;
+  --mainWhite: #f3f3f3;
+  --mainDark: #232528;
+  --mainYellow: #ffa400;
+}
+
+body {
+  font-family: 'Abel', sans-serif !important;
+  background: var(--mainWhite) !important;
+  color: var(--mainDark) !important;
+}
+
+.class_main {
+  background-color: #232528;
+  padding: 10px 20px;
+}
+
+.class_header, .class_content, .class_footer {
+  border: 1px solid red;
+  margin: 10px 0px;
+  background-color: bisque;
+  padding: 10px 20px;
+}
+
+.class_header > ul {
+  display: flex;
+  justify-content: flex-end;
+}
+.class_header > ul > li { 
+  margin: 0px 5px;
+  list-style: none;
+}
+

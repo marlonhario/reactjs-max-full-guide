@@ -1,0 +1,196 @@
+Dependency Management Tools
+    - npm or yarn
+Bundler
+    - Webpack
+Compiler(Next-Gen JavaScript)
+    - Babel + Preset
+
+Need to install before building react app
+    - nodejs
+    - git 
+    - nvm (optional)
+
+    after installation
+        : npm install -g create-react-app 
+        : create-react-app proj_name
+        : npm start
+
+JSX Restriction
+    - className - is the attribute used in jsx while in html used class
+    - cannot return more than one main elements, it strictly return just one element and its child.
+    - <React.Fragment></React.Fragment> - used this element if you dont want to use div as a parent element in your jsx
+    - you should name your import component to uppercase the first letter because all lower case name ussaually used in html elements
+    - use self closing tag component if you dont have any nested component
+        e.g. 
+            <Person />
+    - use opening and closing tag if there is nested
+        e.g.
+            <Person></Person>
+    - to access nested element in a tag you to call {props.children}
+        e.g.
+            <Person name="Manu" age="29">My hubbies: Racing</Person>
+        e.g.
+            return (<div>{props.children}</div>)
+
+
+props - use in arguments when passing props in normal function function component
+    e.g. 
+        <Person name="Manu" age="29" />
+
+this.props - use this when passing props into class-based function 
+    e.g.
+        class Person extends Component {
+            render () {
+                return <p>My name is {this.props}</p>;
+            }
+        }
+
+
+state - is a special property used in class-base function
+      - not availabel in normal function component
+      - JavaScript object
+      - special property
+
+onClick events 
+
+calling a function
+    - use this.functionName - to call a function that is not executed after dom is render and it will wait untill some event happen
+    - use this.functionName() - if you want to execute a function as soon as the dom render
+
+
+Do not change state directly it will cause error
+    e.g.
+        this.state.persons[0].name = 'Maximilian';
+
+setState - it is available when you extends component in your class function
+         - use this to not to change or update the state
+            e.g.
+                // simple setState
+                this.setState({
+                    persons: [
+                        { name: 'Oirah', age: 28 },
+                        { name: 'Manu', age: 29 },
+                        { name: 'Stephanie', age: 26 },
+                    ]
+                })
+                 
+
+passing reference method from class-base function into normal function
+    e.g.
+        <Person name={this.state.persons[1].name} 
+                  age={this.state.persons[1].age}
+                  click={this.switchNameHandler} />
+
+        // and call it into normal function like: 
+            <h1 onClick={props.click}></h1>
+
+        // dont add aprenthesis in method passing into props like: becasue it would emmidiately invoke after dom load without trigger event
+            <Person name={this.state.persons[1].name} 
+                  age={this.state.persons[1].age}
+                  click={this.switchNameHandler()} />
+
+passing reference method with argument data from class-base function into normal function
+    e.g. recommended way using bind
+        switchNameHandler = (newName) => {
+            // console.log('Was clicked');
+            this.setState({
+                persons: [
+                    { name: newName, age: 28 },
+                    { name: 'Manu', age: 29 },
+                    { name: 'Stephanie', age: 26 },
+                ]
+            })
+        }
+        
+        <button onClick={this.switchNameHandler.bind(this, 'Maximilian')}>Switch Name</button>
+
+        // access into normal function =================
+        <h1 onClick={props.click}></h1>
+
+    e.g not recommended can cause ineffecient
+        // alternative passing method by passing annymous function like :
+        <button onClick={() => this.switchNameHandler('NOLRAM!!')}>Switch Name</button>    // annymous function
+
+
+two way binding
+    e.g.    
+        nameChangeHandler = (event) => {
+            this.setState({
+            persons: [
+                { name: 'Max', age: 28 },
+                { name: event.target.value, age: 29 },
+                { name: 'Stephanie', age: 26 },
+            ]
+            })
+        }
+
+        <Person name={this.state.persons[1].name} 
+                  age={this.state.persons[1].age}
+                  click={ () => this.switchNameHandler('NOLRAM!!')} 
+                  changed={this.nameChangeHandler} />
+
+        <input type="text" onChange={props.changed} value={props.name} />                   // two way bindingbecause: events triggerer and value has a props call
+
+
+- event in function would automatically be passing in react 
+
+- styling would be work on css and import it on you js file
+
+- inline styling in JavaScript
+    e.g.
+         render() {
+            const style = {
+            backgroundColor: 'white',
+            font: 'inherit',
+            border: '1px solid blue',
+            padding: '8px'
+            }
+
+            return (
+                <React.Fragment>
+                    
+                    <button 
+                        style={style}
+                        onClick={this.switchNameHandler.bind(this, 'Maximilian')}>Switch Name</button>
+                </React.Fragment>
+            )
+        }
+
+    - property of a style woul be different e.g.
+        - backgroundColor   // this react defining property using camelcase naming
+        - background-color  // you could use this in react inline styling but you need to wrap it in quotes like 'background-color'
+    - all value of a properties must be wrap in quotation in javascript
+    - hovering is hard to apply in inline style javascript
+
+=============================================================================================================
+=============================================================================================================
+===============================================Folder Four 4=================================================
+=============================================================================================================
+
+
+- to add comment in react return value
+    e.g.
+        {/* {<Person name={this.state.persons[2].name} 
+                  age={this.state.persons[2].age} >Children elements</Person>} */}
+
+
+- using if block in react will not work (like: if else)
+    - intead use turnary operator (like: condition ? true : false)  > ternary is the default javascript construct
+
+
+- we can interject javascript expression in JSX using curly braces
+
+- another example on setState   
+state = {
+    persons: [
+            { name: 'Max', age: 28 },
+            { name: 'Manu', age: 29 },
+            { name: 'Stephanie', age: 26 },
+        ],
+        otherState: 'some other value',
+        showPersons: false
+    }
+    togglePersonHandler = () => {
+        const doesShow = this.state.showPersons;
+        this.setState({ showPersons: !doesShow });
+    }

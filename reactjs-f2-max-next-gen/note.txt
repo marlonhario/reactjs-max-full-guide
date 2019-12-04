@@ -1,0 +1,123 @@
+tools use to testing    
+    - codepen
+    - jsbin
+
+
+var - is global scope type
+    - highly encourage to use let and const
+let - modern type of var but it is lighter than var
+const - variable that never change
+arrow functions - 
+ES7 - is the version of next generation
+
+
+e.g. normal function 
+    function myFunc() {
+        ...
+    }
+    -take issues on this keyword
+e.g. next-gen function
+     const myFunc = () => {
+        ...
+    }
+    - No more issues with the this keyword
+
+
+Exports & Imports(Modules)
+    e.g. 
+        Person.js
+            const person = {
+                name: 'Max'
+            }
+            export default person                            //default export
+
+
+        utility.js
+            export const clean = () => {...}
+            export const baseData = 10;                     //named export
+
+        
+        app.js
+            import person from './person.js'
+            import prs from './person.js'                   //whatever you name the default name will always be default that's the use of default      
+
+            import { baseData } from './utility.js;         //what ever you export that name will be call in exact name and that's the use of name export
+            import { clean } from './utility.js;
+            import { baseData, clean } from './utility.js;  //alternative way of calling named exports by calling all it's name
+            import { clean as Clean } from './utility.js;   //alternative way of calling named exports by calling alias on it
+            import { * as bundled } from './utility.js;     //alternative way of calling named exports by calling * mean all and alias it to bundled and when you call single one them you write it (bundled.clean, budled.baseData)
+
+
+
+classes - are blue prints for objects
+        - and can contain properties and methods
+        - convenient way of creating constructor functions
+        - also support inheretance 
+            e.g.
+                class Person extends Master
+
+        e.g.
+            class Person {
+                name = 'Max'
+                call = () => {...}
+            }
+
+            const myPerson = new Person()                   //usage or to instantiate
+            myPerson.call()
+            console.log(myPerson.name)
+
+
+
+Properties are like "variables attached to classes/ objects"
+    ES6
+        constructor () {
+            this.myProperty = 'value'
+        }
+
+    ES7 (next-gen)
+        myProperty = 'value'
+
+Methods are like "functions attached to classes/ objects"
+    ES6
+        myMethod () {...}
+
+    ES7
+        myMethod = () => {...}
+
+
+
+Video F2-6 - needs to apply babel before testing
+
+
+Spread Operators - Used to split up array elements OR object properties 
+                 e.g. 
+                    const newArray = [...oldArray, 1, 2]
+                    const newObject = {...oldObject, newProp: 5}
+
+Rest Operators - Used to merge a list of function arguments into an array
+                 e.g.
+                    function sortArgs(...args) {
+                        return args.sort()
+                    }
+
+Destructuring - Easily extract array elements or object properties and store them in variables
+    e.g.
+        Array Destructuring
+            [a, b] =['Hello', 'Max']
+            console.log(a)      //Hello
+            console.log(b)      //Max
+        
+        Object Destructuring
+            {name} = {name: 'Max', age: 28}
+            console.log(name)   //Max
+            console.log(age)    //undefined
+
+
+Reference and Primitive type (not next-gen but important to remember)
+    primitive type - numbers, string, booleans these are called primitive either you reassign or store in another variable
+    reference type - object and arrays are reference
+
+
+
+Array function - are map, filter etc. (but not next-gen)
+               - and return a new array
