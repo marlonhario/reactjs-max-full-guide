@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import './App.css';
 import Persons from '../componenets/Persons/Persons';
 import Radium, { StyleRoot } from 'radium';
 import Cockpit from '../componenets/Cockpit/Cockpit';
+import Form from '../componenets/Form/Form';
 
 
-class App extends Component {
+class App extends PureComponent {
   constructor(props) {
     super(props);
     console.log('[App.js] Inside Constructor', props);
@@ -18,14 +19,6 @@ class App extends Component {
       otherState: 'some other value',
       showPersons: false
     }
-  }
-
-  UNSAFE_componentWillMount() {
-    console.log('[App.js] Inside componentWillMount')
-  }
-
-  componentDidMount() {
-    console.log('[App.js] Inside componentDidMount')
   }
 
   // state = {
@@ -73,8 +66,36 @@ class App extends Component {
         { name: newName, age: 28 },
         { name: 'Manu', age: 29 },
         { name: 'Stephanie', age: 26 },
-      ]
+      ],
+      otherState: 'some other value',
+      showPersons: false
     })
+  }
+
+  UNSAFE_componentWillMount() {
+    console.log('[App.js] Inside componentWillMount')
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('[UPDATE App.js] Inside componentWillReceiveProps', nextProps)
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState)
+  //   return nextProps.persons !== this.props.persons || nextState.showPersons !== this.state.showPersons;
+  //   // return true;
+  // }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState)
+  }
+
+  componentDidUpdate() {
+    console.log('[UPDATE App.js] Inside componentDidUpdate')
   }
 
   deletePersonHandler = (personIndex) => {
@@ -109,6 +130,7 @@ class App extends Component {
       <React.Fragment>
         <StyleRoot>
           <div>
+            <button onClick={() => {this.setState({showPersons: true})}}>Show Person</button>
             <Cockpit 
               showPersons={this.state.showPersons} 
               persons={this.state.persons}
@@ -118,6 +140,8 @@ class App extends Component {
               style={style}
               onClick={this.switchNameHandler.bind(this, 'Maximilian')}>Switch Name</button>} */}
             {persons}
+
+            <Form />
           </div>
         </StyleRoot>
       </React.Fragment>

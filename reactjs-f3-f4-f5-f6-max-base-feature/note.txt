@@ -506,13 +506,20 @@ debugging
             - Don't update state it will triggers re-render
             - don't call setState in here
 
-    - Update - component lifecycle process (triggered by parent)
+    - Update - component lifecycle process (triggered by parent or external trigger) / update related hooks
         - changing props and internally triggered updates. or by changing state
         :
         - componentWillReceiveProps(nextProps)
             - can sync local state to props, but if you don't sync then don't use this method
             - side effect? e.g. reaching out to a web server so request which come back and edit the state of your application - bad practice
         - shouldComponentUpdate(nextProps, nextState)
+            - beware of performance issue like rendering main DOM even though it is not necessary and this component will be block for that issue
+                e.g. 
+                    shouldComponentUpdate(nextProps, nextState) {
+                        console.log('[UPDATE Persons.js] Inside shouldComponentUpdate', nextProps, nextState)
+                        return nextProps.persons !== this.props.persons || nextState.showPersons !== this.state.showPersons;
+                    }
+            - this will return true or false
             - basically the props and state which triggered this update
             - this is the method which may actually cancel the updating process base in your trapping, return true to continue false to cancel and lifecycle will stop
             - carefull to use this it will broke your state or dome if you stop the cycle
@@ -529,7 +536,84 @@ debugging
             - you may cause side effects just like componentDidMount
             - it is same as componentDidMount but in updating case
 
+     - Update - component lifecycle process (triggered by Internal Change) / update related hooks
+        - because of setState basically
+        - everthing call setState will be trigger
+        :
+        - shouldComponentUpdate(nextProps, nextState)
+            - same logic
+        - componentWillUpdate()
+            - same logic
+        - render()
+            - then update all child components props to be precise
+        - componentDidUpdate()
+            - same logic
+
+
+- PureComponent - this component has already shouldComponentUpdate() checking built in so it is good to use rather than Component class
+                - this will continue updating if detects differences
+                - use this component if necessary
 
 - You can't define method in function component
 
 - you cannot create variable outside the render method
+
+- you can use this.props syntax in component lifecycle without using arrow function because it's extends Components
+
+- customize and controlDevTools > More Tools > Rendering >check print flashing
+    - it is usefull to see what dom are affected on it's actions done
+    - beware of performance issue like rendering main DOM even though it is not necessary
+
+
+- Rendering and updates (where to use PureComponent)
+
+- render() - is not actually the process to update DOM.
+           - this is only preparing what html would look like in DOM
+
+
+- How React Updates the DOM
+    - render() 
+        - shouldComponentUpdate() passed! to proceed to render
+    - after passing to shouldComponentUpdate and after render it would compare the: 
+        - Old Virtual DOM 
+        - Re-rendered Virtual DOM
+            - future value DOM
+    - reacts basically keeps two copies of the DOm  
+    - react thi two approach because it's faster than the real DOM
+    - Vitual DOM - is a DOM representation in javascript
+    - when the render() method is called the re-render V DOM will be created
+    - but after render methd called the DOM will not update automatically, reacts need to compare the two V DOm if there is diff 
+        - if differences found? then update the real DOM 
+        - but it will not update the whole DOM entirely it will update where the differences detected
+        - but if no differences found then it doesn't update the DOM
+
+
+
+- YOu can return array element - but not good practice but it will work somehow
+
+- higher order component (HOC) - normal react components
+    - hocs e.g. is like a wrapping div 
+    - this is usefull for removing unnecessary div
+        e.g. : src\hoc\Aux.js
+
+- basic form handling
+    e.g.
+        \componenets\Form\Form.js
+
+
+== UI frameworks ===
+- https://material-ui.com/ - simple yet elegant
+    - lots of designs compare to evergreen
+    - create by google
+- https://blueprintjs.com/docs/ - complex data analysis
+    - downside - complex to use
+- https://evergreen.segment.com/components - best looking react framework
+    - downside - it doesn't have alot of premid design
+- https://ant.design/docs/react/introduce
+    - most popular on designing systems
+    - tons of component
+- https://react-bootstrap.github.io/components/alerts
+    - one of the most popular ui framework
+    - easiest way to implement ui
+    - reliable
+    - downside - poor aesthetic

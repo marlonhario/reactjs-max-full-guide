@@ -35,7 +35,8 @@ class Person extends Component {
         return (
         
             <div className={style}>
-                <h1 onClick={this.props.click}>Hello this is {this.props.name} component I am {Math.floor(Math.random() * 30)} for random and {this.props.age} for props years old</h1>
+                {/*<h1 onClick={this.props.click}>Hello this is {this.props.name} component I am {Math.floor(Math.random() * 30)} for random and {this.props.age} for props years old</h1>*/}
+                <h1 onClick={this.props.click}>Hello this is {this.props.name} component I am {this.props.age} years old</h1>
                 <p>{this.props.children}</p>
                 <input type="text" onChange={this.props.changed} value={this.props.name} />
             </div>

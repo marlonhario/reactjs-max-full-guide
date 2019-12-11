@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium, { StyleRoot } from 'radium';
+import Aux from '../../hoc/Aax';
 
 const cockpit = (props) => {
     // inline javascript style
@@ -34,15 +35,17 @@ const cockpit = (props) => {
 
     return (
         <React.Fragment>
-            <StyleRoot>
-                <h1 className={classes.join(' ')}>hello world</h1>
+            <Aux>
+                <StyleRoot>
+                    <h1 className={classes.join(' ')}>hello world</h1>
 
-                <button 
-                style={style}>Switch Name</button>
+                    <button 
+                    style={style}>Switch Name</button>
 
-                <button 
-                onClick={props.clicked}>Toggle Person</button>
-            </StyleRoot>
+                    <button 
+                    onClick={props.clicked}>Toggle Person</button>
+                </StyleRoot>
+            </Aux>
         </React.Fragment>
 
     );
