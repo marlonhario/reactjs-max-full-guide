@@ -1,6 +1,7 @@
 import React from 'react';
 
 const footer = (props) => {
+    
     return (
         <React.Fragment>
             <div onClick={props.sidebarToogle}>
